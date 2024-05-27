@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn with Olu</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .language-btn {
+            background-color: #3F51B5; /* Indigo */
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        h2 {
+            color: #E67E22; /* Orange */
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        img {
+            width: 200px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .lesson-content {
+            text-align: left;
+        }
+
+        .lesson-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .lesson-card h2 {
+            margin-top: 0;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Learn with Olu</h1>
+    </header>
+    <nav>
+        <button class="language-btn" onclick="startLesson('igbo')">Igbo</button>
+        <button class="language-btn" onclick="startLesson('hausa')">Hausa</button>
+        <button class="language-btn" onclick="startLesson('yoruba')">Yoruba</button>
+    </nav>
+    <main>
+        <div class="lesson-card" id="igbo">
+            <h2>Igbo Lessons</h2>
+            <div class="lesson-content igbo-lesson hidden">
+                <!-- Lesson content will be loaded here -->
+            </div>
+        </div>
+        <div class="lesson-card" id="hausa">
+            <h2>Hausa Lessons</h2>
+            <div class="lesson-content hausa-lesson hidden">
+                <!-- Lesson content will be loaded here -->
+            </div>
+        </div>
+        <div class="lesson-card" id="yoruba">
+            <h2>Yoruba Lessons</h2>
+            <div class="lesson-content yoruba-lesson hidden">
+                <!-- Lesson content will be loaded here -->
+            </div>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Learn with Olu
+    </footer>
+
+    <script>
+        function startLesson(language) {
+            alert('Starting ' + language + ' lesson...');
+            const lessonContent = document.querySelector(`.${language}-lesson`);
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `lessons/${language}.html`, true); // Replace with your actual lesson data source
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    lessonContent.innerHTML = xhr.responseText;
+                    lessonContent.classList.remove('hidden');
+                } else {
+                    alert('Error loading lesson content!');
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
